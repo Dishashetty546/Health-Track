@@ -1,23 +1,23 @@
-import { catchasyncErrors} from "../middlewears/catchAsyncErrors.js"
-import ErrorHandler from "../middlewears/errormiddlewear.js"
-import {User} from "../models/userSchema.js"
+import { catchasyncErrors } from "../middlewears/catchAsyncErrors.js";
+import ErrorHandler from "../middlewears/errormiddlewear.js";
+import { User } from "../models/userSchema.js";
 
-export const patientRegister = catchasyncErrors(async(req,res,next)=>{
-    const{firstName,lastName,email,phone,password,gender,dob,nic,role}= req.body
-    if(!firstName||!lastName||!email||!phone||!password||!gender||!dob||!nic||!role)
-        {
-            return next(new ErrorHandler("Please fill full form!",400));
-        } 
-        const user = await User.findOne({email});
-        if(user)
-            {
-                return next(new ErrorHandler("user already Registered!",400));
-            }
-            user = await user.create({firstName,lastName,email,phone,password,gender,dob,nic,role});
-            res.status(200).json({
-                 success:true,
-                message:"user Registerd",
-            });
-            
+export const patientRegister = catchasyncErrors(async (req, res, next) => {
+    const { firstName, lastName, email, phone, password, gender, dob, nic, role,doctorDepartment,docAvatar } = req.body;
 
-})
+    if (!firstName || !lastName || !email || !phone || !password || !gender || !dob || !nic || !role || !doctorDepartment || !docAvatar) {
+        return next(new ErrorHandler("Please fill the full form!", 400));
+    }
+
+    let user = await User.findOne({ email });
+    if (user) {
+        return next(new ErrorHandler("User already registered!", 400));
+    }
+
+    user = await User.create({ firstName, lastName, email, phone, password, gender, dob, nic, role,doctorDepartment, docAvatar });
+
+    res.status(200).json({
+        success: true,
+        message: "User registered successfully",
+    });
+});

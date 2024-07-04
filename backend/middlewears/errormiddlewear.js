@@ -1,45 +1,50 @@
-class ErrorHandler extends Error{
-    constructor(message,statusCode){
+class ErrorHandler extends Error {
+    constructor(message, statusCode) {
         super(message);
         this.statusCode = statusCode;
+        Error.captureStackTrace(this, this.constructor);
     }
-}export const errormiddlewears =(err,req,res,next)=>{
-    err.message = err.message || "Internal server Error";
-    err.statusCode = err.statusCode || 500; //500-internal server error
+}
 
-//this error is for duplicates like if we enter mail id, already existing ones, this can show duplicate errors
-    if(err.code ===11000){
-        const message = `duplicate ${Object.keys(err.keyvalue)} entered`;
-        err= new ErrorHandler(message,400); //400 is for status code
-    }
+export const errorMiddleware = (err, req, res, next) => {
+    err.message = err.message || "Internal server error";
+    err.statusCode = err.statusCode || 500; // 500 - internal server error
 
-// invalid token format or signature mismatch, typically arising from authentication failures.
-    if(err.code === "jsonWebTokenError"){
-        const message = "json web token is invalid, try again!";
-        err= new ErrorHandler(message,400); //400 is for status code
-    }
- 
-//JWT's expiration time (expiry) has passed, indicating that the token is no longer valid for authentication 
-    if(err.code === "tokenexpirederror"){
-        const message = "json web token is invalid, try again!" ;
-        err= new ErrorHandler(message,400); //400 is for status code
+    // Handle duplicate key error (e.g., duplicate email)
+    if (err.code === 11000) {
+        const message = `Duplicate ${Object.keys(err.keyValue)} entered`;
+        err = new ErrorHandler(message, 400); // 400 - bad request
     }
 
-//MongoDB and Mongoose, CastError occurs when data is incorrectly formatted or fails type validation, often due to mismatched data types between the schema
-    if(err.code === "CastError"){
-        const message = `Ivalid ${err.path}`;
-        err= new ErrorHandler(message,400); //400 is for status code
+    // Handle invalid JWT token
+    if (err.name === "JsonWebTokenError") {
+        const message = "JSON web token is invalid, try again!";
+        err = new ErrorHandler(message, 400); // 400 - bad request
     }
 
-    const errorMessage = err.errors?
-    Object.values(err.errors)
-    .map((error)=>error.message)
-    .join("")
-    :err.message;
-    
+    // Handle expired JWT token
+    if (err.name === "TokenExpiredError") {
+        const message = "JSON web token has expired, try again!";
+        err = new ErrorHandler(message, 400); // 400 - bad request
+    }
+
+    // Handle cast errors (e.g., invalid ObjectId)
+    if (err.name === "CastError") {
+        const message = `Invalid ${err.path}: ${err.value}`;
+        err = new ErrorHandler(message, 400); // 400 - bad request
+    }
+
+    // Aggregate mongoose validation errors
+    const errorMessage = err.errors
+        ? Object.values(err.errors)
+            .map((error) => error.message)
+            .join(", ")
+        : err.message;
+
     return res.status(err.statusCode).json({
         success: false,
-        message:err.message,
+        message: errorMessage,
     });
 };
+
 export default ErrorHandler;
