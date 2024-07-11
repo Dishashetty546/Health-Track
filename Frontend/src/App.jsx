@@ -10,8 +10,11 @@ import Patients from './pages/Patients';
 import Register from './pages/Register';
 
 import Services from './Components/Services';
-import Home from './patientpages/Home';
-import Dashboard from './patientpages/Dashboard'; 
+import P_Home from './patientpages/P_Home';
+import P_Dashboard from './patientpages/P_Dashboard';
+import P_Notifications from './patientpages/P_Notifications';
+import P_Navbar from './patientpages/P_Navbar';
+
 
 
 const App = () => {
@@ -29,8 +32,13 @@ const App = () => {
          
           <Route path="/register" element={<Register />} />
           <Route path="/services" element={<Services/>}/>
-          <Route path="/home" element={<Home/>}/>
-          <Route path="/dashboard" element={<Dashboard/>}/>
+          <Route path="/p_home" element={<P_Home/>}/>
+          <Route path="/p_dashboard" element={<P_Dashboard/>}/>
+          <Route path="/p_notifications" element={<P_Notifications/>}/>
+          <Route path="/p_navbar" element={<P_Navbar/>}/>
+          
+          
+       
         </Routes>
 
       </div>

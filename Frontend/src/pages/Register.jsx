@@ -72,7 +72,10 @@ const Register = () => {
         <InputField type="text" placeholder="Security Answer" />
         <LoginLink to="/login">Already Registered? Login Now</LoginLink>
         <div style={{ textAlign: 'center' }}>
-          <SubmitButton type="submit">Register</SubmitButton>
+        <Link to="/p_home" style={{ textDecoration: 'none', alignItems: 'center' }}>
+            Register Now
+          </Link>
+          
         </div>
       </Form>
     </Container>
