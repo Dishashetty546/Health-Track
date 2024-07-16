@@ -1,4 +1,5 @@
 import React from "react";
+import MainNavbar from "./MainNavbar";
 
 const Hero = ({ title, imageUrl }) => {
   return (
@@ -17,6 +18,7 @@ const Hero = ({ title, imageUrl }) => {
           </span>
         </div>
       </div>
+      <MainNavbar/>
     </>
   );
 };

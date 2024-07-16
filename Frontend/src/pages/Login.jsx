@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'; // Import Link from react-router-dom fo
 
 const Login = () => {
   return (
+    
     <div className="container form-component login-form">
       <h2>Sign In</h2>
       <p>Please Login To Continue</p>
@@ -34,6 +35,7 @@ const Login = () => {
         </div>
       </form>
     </div>
+    
   );
 };
 

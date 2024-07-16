@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import MainNavbar from './MainNavbar';
 
 const Container = styled.div`
   position: relative;
@@ -83,6 +84,7 @@ const Services = ({ imageUrl }) => {
   };
 
   return (
+    <>
     <Container>
       <BannerImage src={imageUrl} alt="Services Image" />
       <Heading>
@@ -111,6 +113,9 @@ const Services = ({ imageUrl }) => {
         </Carousel>
       </CarouselContainer>
     </Container>
+    <MainNavbar/>
+    </>
+    
   );
 };
 
