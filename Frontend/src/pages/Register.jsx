@@ -50,6 +50,28 @@ const LoginLink = styled(Link)`
 `;
 
 const Register = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate(); // Initialize useNavigate
+
+  async function submit(e) {
+    e.preventDefault();
+    try {
+      await axios.post('http://localhost:5173/login', {
+        email,
+        password,
+      });
+      // Add logic to handle successful login if needed, like redirecting
+      navigate('/dashboard'); // Redirect to dashboard or another page on successful login
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+
+
+
+
   return (
     <Container>
       <Title>Sign Up</Title>
