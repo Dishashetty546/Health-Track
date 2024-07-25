@@ -1,4 +1,4 @@
-import React, { useState } from 'react'; // Import useState
+import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 
@@ -10,19 +10,21 @@ const Login = () => {
   async function submit(e) {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:5173/login', {
+      const res = await axios.post('http://localhost:5001/login', {
         email,
         password,
       });
 
-      if (res.data === "exist") {
-        navigate("/p_home"); // Navigate to /p_home on successful login
-      } else if (res.data === "notexist") {
-        alert("User not registered");
+      // Check if the response is successful
+      if (res.status === 200 && res.data) {
+        console.log('Login successful');
+        navigate('/p_home'); // Navigate to /p_home on successful login
+      } else {
+        alert("Invalid credentials");
       }
     } catch (error) {
+      console.log('Error during login:', error);
       alert("Wrong details");
-      console.log(error);
     }
   }
 

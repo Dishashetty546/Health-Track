@@ -1,7 +1,7 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-
+import axios from 'axios';
 
 const Container = styled.div`
   max-width: 600px;
@@ -50,56 +50,71 @@ const LoginLink = styled(Link)`
 `;
 
 const Register = () => {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate(); // Initialize useNavigate
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [phone, setPhone] = useState('');
+  const [specialization, setSpecialization] = useState('');
+  const [licenseNumber, setLicenseNumber] = useState('');
+  const [experience, setExperience] = useState('');
+  const [clinicName, setClinicName] = useState('');
+  const [clinicAddress, setClinicAddress] = useState('');
+  const [workPhone, setWorkPhone] = useState('');
+  const [securityQuestion, setSecurityQuestion] = useState('');
+  const [securityAnswer, setSecurityAnswer] = useState('');
+
+  const navigate = useNavigate();
 
   async function submit(e) {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5173/login', {
+      await axios.post('http://localhost:5001/register', {
+        firstName,
+        lastName,
         email,
         password,
+        confirmPassword,
+        phone,
+        specialization,
+        licenseNumber,
+        experience,
+        clinicName,
+        clinicAddress,
+        workPhone,
+        securityQuestion,
+        securityAnswer
       });
-      // Add logic to handle successful login if needed, like redirecting
-      navigate('/dashboard'); // Redirect to dashboard or another page on successful login
+      navigate('/login'); // Redirect to login page on successful registration
     } catch (error) {
-      console.log(error);
+      console.log('Error during registration:', error.response ? error.response.data : error.message);
     }
   }
-
-
-
-
 
   return (
     <Container>
       <Title>Sign Up</Title>
       <p>Please Sign Up To Continue</p>
       <p>Welcome to our Patient Record Management System! To access your account, please sign in.</p>
-      <Form>
-        <InputField type="text" placeholder="First Name" />
-        <InputField type="text" placeholder="Last Name" />
-        <InputField type="email" placeholder="Email" />
-        <InputField type="password" placeholder="Password" />
-        <InputField type="password" placeholder="Confirm Password" />
-        <InputField type="tel" placeholder="Phone" />
-        <InputField type="text" placeholder="Specialization" />
-        <InputField type="text" placeholder="License Number" />
-        <InputField type="number" placeholder="Experience" />
-        <InputField type="text" placeholder="Clinic/Hospital Name" />
-        <InputField type="text" placeholder="Clinic/Hospital Address" />
-        <InputField type="tel" placeholder="Work Phone" />
-        <InputField type="text" placeholder="Security Question" />
-        <InputField type="text" placeholder="Security Answer" />
-        <LoginLink to="/login">Already Registered? Login Now</LoginLink>
-        <div style={{ textAlign: 'center' }}>
-        <Link to="/p_home" style={{ textDecoration: 'none', alignItems: 'center' }}>
-            Register Now
-          </Link>
-          
-        </div>
+      <Form onSubmit={submit}>
+        <InputField type="text" placeholder="First Name" value={firstName} onChange={e => setFirstName(e.target.value)} />
+        <InputField type="text" placeholder="Last Name" value={lastName} onChange={e => setLastName(e.target.value)} />
+        <InputField type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
+        <InputField type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
+        <InputField type="password" placeholder="Confirm Password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} />
+        <InputField type="tel" placeholder="Phone" value={phone} onChange={e => setPhone(e.target.value)} />
+        <InputField type="text" placeholder="Specialization" value={specialization} onChange={e => setSpecialization(e.target.value)} />
+        <InputField type="text" placeholder="License Number" value={licenseNumber} onChange={e => setLicenseNumber(e.target.value)} />
+        <InputField type="number" placeholder="Experience" value={experience} onChange={e => setExperience(e.target.value)} />
+        <InputField type="text" placeholder="Clinic/Hospital Name" value={clinicName} onChange={e => setClinicName(e.target.value)} />
+        <InputField type="text" placeholder="Clinic/Hospital Address" value={clinicAddress} onChange={e => setClinicAddress(e.target.value)} />
+        <InputField type="tel" placeholder="Work Phone" value={workPhone} onChange={e => setWorkPhone(e.target.value)} />
+        <InputField type="text" placeholder="Security Question" value={securityQuestion} onChange={e => setSecurityQuestion(e.target.value)} />
+        <InputField type="text" placeholder="Security Answer" value={securityAnswer} onChange={e => setSecurityAnswer(e.target.value)} />
+        <SubmitButton type="submit">Sign Up</SubmitButton>
       </Form>
+      <LoginLink to="/login">Already have an account? Sign In</LoginLink>
     </Container>
   );
 };
