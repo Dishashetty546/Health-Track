@@ -1,4 +1,6 @@
 # Hospital Management System
+![image](https://github.com/user-attachments/assets/651ab464-c084-441a-8a11-0fd2d636a613)
+
 
 ## Introduction
 
@@ -23,6 +25,8 @@ Welcome to the Hospital Management System, a comprehensive solution designed to 
 ## Technologies Used
 
 ### Frontend
+
+![image](https://github.com/user-attachments/assets/b7c3ef2c-2c1e-4c2f-9ba0-c3d4df978546)
 - **React**: UI Library
 - **Vite**: Frontend Tooling
 - **Axios**: HTTP Client
@@ -32,6 +36,9 @@ Welcome to the Hospital Management System, a comprehensive solution designed to 
 - **React Toastify**: Notification Library
 
 ### Backend
+
+![image](https://github.com/user-attachments/assets/bc3354c5-dc20-4112-bce6-45e31db925ee)
+
 - **Node.js**: JavaScript Runtime
 - **Express.js**: Web Framework
 - **MongoDB**: Database
@@ -54,9 +61,55 @@ Welcome to the Hospital Management System, a comprehensive solution designed to 
    git clone https://github.com/yourusername/hospital-management-system.git
    cd hospital-management-system/frontend
 2. **install dependencies:**
-   ![image](https://github.com/user-attachments/assets/d12d2dd5-c0e2-429a-b742-e6e585d1f3ab)
+    ```sh
+   npm create vite@latest ./
+   npm install
+   npm i axios react-icons react-multi-carousel react-router-dom react-toastify
+
 3. **Run the development server:**
-   ![image](https://github.com/user-attachments/assets/24642c25-9118-423a-9566-6c731e1ce5b2)
+    ```sh
+   npm run dev
+
+## Backend Setup
+
+1. **Navigate to the backend folder:**
+   ```sh
+   cd ../backend
+
+2. **Install:**
+   ```sh
+   npm init -y
+   npm install bcrypt cloudinary cookie-parser cors dotenv express mongoose express-fileupload jsonwebtoken validator
+
+3. **Set up environment variables(.env):**
+   ```sh
+   PORT=4000
+   MONGODB_URL=your_mongodb_connection_string
+   CLOUDINARY_CLOUD_NAME=your_cloud_name
+   CLOUDINARY_API_KEY=your_api_key
+   CLOUDINARY_API_SECRET=your_api_secret
+   JWT_SECRET=your_jwt_secret
+
+4. **Run the development server:**
+   ```sh
+   npm run dev
+   
+## Usage
+
+### Frontend
+- The frontend application runs on [http://localhost:5173](http://localhost:5173).
+- Navigate to different pages like Home, About Us, Appointments, Login, and Register using the navigation bar.
+- Use the contact form on the Home page to send messages.
+
+### Backend
+- The backend server runs on [http://localhost:4000](http://localhost:4000).
+- Use Postman or any API client to test API endpoints.
+- Ensure MongoDB is running and connected.
+
+## Contributing
+Contributions are welcome! Please open an issue or submit a pull request.
+
+   
 
 
 
