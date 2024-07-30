@@ -11,7 +11,7 @@ cloudinary.v2.config({
     api_key: process.env.CLOUDINARY_API_KEY,
     api_secret: process.env.CLOUDINARY_API_SECRET
 });
-
+// app.use('/api/create', patientDetRouter);
 // Start the server
 const PORT = process.env.PORT || 5001; // Default to 5001 if not provided
 app.listen(PORT, () => {

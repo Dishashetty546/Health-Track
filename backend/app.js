@@ -5,12 +5,11 @@ import cookieParser from 'cookie-parser';
 import fileUpload from 'express-fileupload';
 import { dbconnection } from './database/dbconnection.js';
 import messageRouter from './router/messagerouter.js';
-import userRouter from './router/userRouter.js';  // Assuming this is correctly named
+import userRouter from './router/userRouter.js';
 import errormiddleware from './middlewears/errormiddlewear.js';
 import DoctorModel from './models/Doctor.js';
 import bcrypt from 'bcrypt';
-
-import patientdetailsRouter from './router/patientdetailsrouter.js'; // Corrected import
+import router from './models/Patientdetails.js';
 
 // Initialize dotenv
 config({ path: './config/config.env' });
@@ -18,7 +17,7 @@ config({ path: './config/config.env' });
 // Create an express application
 const app = express();
 
-// Initialize the database connection
+// Initialize the database connectionc
 dbconnection();
 
 // MIDDLEWARES
@@ -39,8 +38,9 @@ app.use(fileUpload({
 // ROUTES
 app.use('/api/v1/message', messageRouter);
 app.use('/api/v1/user', userRouter);
-app.use('/api/v1/patient', patientdetailsRouter);  // Registering the patient router
-
+app.use(express.json());
+app.use(cors());
+app.use('/api/create', userRouter);
 app.get('/', (req, res) => {
     res.send('Server is running');
 });
@@ -64,6 +64,7 @@ app.post('/login', async (req, res) => {
     }
 });
 
+// Register Route
 // Register Route
 app.post('/register', async (req, res) => {
     try {
@@ -130,6 +131,10 @@ app.post('/register', async (req, res) => {
 app.use((req, res) => {
     res.status(404).json({ error: 'Not Found' });
 });
+//collects all routes
+
+app.use('/api',router);
+
 
 // Error handling middleware
 app.use(errormiddleware);

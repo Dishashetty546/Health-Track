@@ -34,6 +34,12 @@ const Createuser = async (req, res) => {
             error: error.message
         });
     }
+
+
 };
 
-export { Createuser };
+const GetUser = async(req,res) =>{
+    
+}
+
+export { Createuser, GetUser };
