@@ -58,8 +58,8 @@ Welcome to the Hospital Management System Application named Health Track, a comp
 
 1. **Clone the repository:**
    ```sh
-   git clone https://github.com/yourusername/hospital-management-system.git
-   cd hospital-management-system/frontend
+   git clone https://github.com/Dishashetty546/Health-Track.git
+   cd Health-Track/frontend
 2. **install dependencies:**
     ```sh
    npm create vite@latest ./
