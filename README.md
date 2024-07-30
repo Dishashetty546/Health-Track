@@ -1,10 +1,10 @@
-# Hospital Management System
+# Health Track
 ![image](https://github.com/user-attachments/assets/651ab464-c084-441a-8a11-0fd2d636a613)
 
 
 ## Introduction
 
-Welcome to the Hospital Management System, a comprehensive solution designed to streamline hospital operations, enhance patient care, and facilitate efficient record management. This project encompasses both frontend and backend development, utilizing modern web technologies.
+Welcome to the Hospital Management System Application named Health Track, a comprehensive solution designed to streamline hospital operations, enhance patient care, and facilitate efficient record management. This project encompasses both frontend and backend development, utilizing modern web technologies.
 
 ## Table of Contents
 - [Features](#features)
